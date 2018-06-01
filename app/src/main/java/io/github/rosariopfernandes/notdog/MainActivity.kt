@@ -1,0 +1,118 @@
+package io.github.rosariopfernandes.notdog
+
+import ability.co.mz.nahu.permissinaManager
+import android.Manifest
+import android.app.Activity
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.os.Bundle
+import android.support.v4.content.ContextCompat
+import android.support.v7.app.AppCompatActivity
+import android.view.View
+import com.bumptech.glide.Glide
+import com.google.firebase.ml.vision.FirebaseVision
+import com.google.firebase.ml.vision.common.FirebaseVisionImage
+import com.google.firebase.ml.vision.label.FirebaseVisionLabelDetectorOptions
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.content_main.*
+
+
+class MainActivity : AppCompatActivity() {
+
+    val CAMERA_REQUEST = 2018
+    val CAMERA_PERMISSION = 100
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        hideSystemUI()
+
+        fab.setOnClickListener {
+
+            permissinaManager {
+                activity = this@MainActivity
+                permission = Manifest.permission.CAMERA
+                permissionExplaination = getString(R.string.permission_explanation)
+                requestCode = CAMERA_PERMISSION
+                then {
+                    val cameraIntent = Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE)
+                    startActivityForResult(cameraIntent, CAMERA_REQUEST)
+                }
+            }
+
+        }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>,
+                                            grantResults: IntArray) {
+        when(grantResults[0])
+        {
+            PackageManager.PERMISSION_GRANTED ->
+            {
+                val cameraIntent = Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE)
+                startActivityForResult(cameraIntent, CAMERA_REQUEST)
+            }
+        }
+
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK)
+        {
+            val photo = data!!.extras.get("data") as Bitmap
+            Glide.with(this).load(photo).into(imageView)
+            labelImage(photo)
+        }
+    }
+
+    fun labelImage(bitmap:Bitmap)
+    {
+        val options = FirebaseVisionLabelDetectorOptions.Builder()
+                .setConfidenceThreshold(0.7f)
+                .build()
+
+        val image = FirebaseVisionImage.fromBitmap(bitmap)
+
+        val detector = FirebaseVision.getInstance()
+                .getVisionLabelDetector(options)
+
+        detector.detectInImage(image)
+                .addOnSuccessListener { list ->
+                    for (label in list)
+                    {
+                        if(label.label.equals("Dog",true)) {
+                            textView.text = getString(R.string.dog)
+                            textView.setBackgroundColor(ContextCompat
+                                    .getColor(this, R.color.colorGreen))
+                            break
+                        }
+                        else {
+                            textView.text = getString(R.string.app_name)
+                            textView.setBackgroundColor(ContextCompat
+                                    .getColor(this, R.color.colorRed))
+                        }
+                    }
+                }
+                .addOnFailureListener{
+                    textView.text = getString(R.string.app_name)
+                    textView.setBackgroundColor(ContextCompat
+                            .getColor(this, R.color.colorRed))
+                }
+    }
+
+    fun hideSystemUI()
+    {
+        window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                or View.SYSTEM_UI_FLAG_FULLSCREEN
+                or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
+    }
+
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+        if(hasFocus)
+            hideSystemUI()
+    }
+}

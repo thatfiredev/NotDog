@@ -80,7 +80,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if(requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK)
+        if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK)
         {
             data?.let {
                 val photo = it.extras.get("data") as Bitmap
@@ -90,9 +90,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun isDog(label: FirebaseVisionLabel) = label.label.equals("Dog", true)
+    private fun isDog(label: FirebaseVisionLabel) = label.label.equals("Dog", true)
 
-    fun showResult(isDog: Boolean) {
+    private fun showResult(isDog: Boolean) {
         textView.text = if (isDog) {
             getString(R.string.dog)
         } else {
@@ -137,7 +137,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
-        if(hasFocus) {
+        if (hasFocus) {
             hideSystemUI()
         }
     }

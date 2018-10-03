@@ -67,10 +67,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>,
                                             grantResults: IntArray) {
-        when(grantResults[0])
-        {
-            PackageManager.PERMISSION_GRANTED ->
-            {
+        when (grantResults[0]) {
+            PackageManager.PERMISSION_GRANTED -> {
                 val cameraIntent = Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE)
                 startActivityForResult(cameraIntent, CAMERA_REQUEST)
             }
@@ -80,8 +78,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK)
-        {
+        if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK) {
             data?.let {
                 val photo = it.extras.get("data") as Bitmap
                 Glide.with(this).load(photo).into(imageView)
@@ -106,8 +103,7 @@ class MainActivity : AppCompatActivity() {
         textView.setBackgroundColor(ContextCompat.getColor(this, color))
     }
 
-    private fun labelImage(bitmap:Bitmap)
-    {
+    private fun labelImage(bitmap:Bitmap) {
         val options = FirebaseVisionLabelDetectorOptions.Builder()
                 .setConfidenceThreshold(0.7f)
                 .build()
@@ -122,13 +118,12 @@ class MainActivity : AppCompatActivity() {
                         showResult(isDog(label))
                     }
                 }
-                .addOnFailureListener{ _ ->
+                .addOnFailureListener { _ ->
                     showResult(isDog = false)
                 }
     }
 
-    private fun hideSystemUI()
-    {
+    private fun hideSystemUI() {
         window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                 or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                 or View.SYSTEM_UI_FLAG_FULLSCREEN

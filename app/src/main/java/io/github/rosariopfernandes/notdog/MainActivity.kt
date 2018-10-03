@@ -31,6 +31,7 @@ import android.view.View
 import com.bumptech.glide.Glide
 import com.google.firebase.ml.vision.FirebaseVision
 import com.google.firebase.ml.vision.common.FirebaseVisionImage
+import com.google.firebase.ml.vision.label.FirebaseVisionLabel
 import com.google.firebase.ml.vision.label.FirebaseVisionLabelDetectorOptions
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
@@ -38,8 +39,10 @@ import kotlinx.android.synthetic.main.content_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    val CAMERA_REQUEST = 2018
-    val CAMERA_PERMISSION = 100
+    companion object {
+        const val CAMERA_REQUEST = 2018
+        const val CAMERA_PERMISSION = 100
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,13 +82,31 @@ class MainActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK)
         {
-            val photo = data!!.extras.get("data") as Bitmap
-            Glide.with(this).load(photo).into(imageView)
-            labelImage(photo)
+            data?.let {
+                val photo = it.extras.get("data") as Bitmap
+                Glide.with(this).load(photo).into(imageView)
+                labelImage(photo)
+            }
         }
     }
 
-    fun labelImage(bitmap:Bitmap)
+    fun isDog(label: FirebaseVisionLabel) = label.label.equals("Dog", true)
+
+    fun showResult(isDog: Boolean) {
+        textView.text = if (isDog) {
+            getString(R.string.dog)
+        } else {
+            getString(R.string.app_name)
+        }
+        val color = if (isDog) {
+            R.color.colorGreen
+        } else {
+            R.color.colorRed
+        }
+        textView.setBackgroundColor(ContextCompat.getColor(this, color))
+    }
+
+    private fun labelImage(bitmap:Bitmap)
     {
         val options = FirebaseVisionLabelDetectorOptions.Builder()
                 .setConfidenceThreshold(0.7f)
@@ -93,34 +114,20 @@ class MainActivity : AppCompatActivity() {
 
         val image = FirebaseVisionImage.fromBitmap(bitmap)
 
-        val detector = FirebaseVision.getInstance()
+        FirebaseVision.getInstance()
                 .getVisionLabelDetector(options)
-
-        detector.detectInImage(image)
+                .detectInImage(image)
                 .addOnSuccessListener { list ->
-                    for (label in list)
-                    {
-                        if(label.label.equals("Dog",true)) {
-                            textView.text = getString(R.string.dog)
-                            textView.setBackgroundColor(ContextCompat
-                                    .getColor(this, R.color.colorGreen))
-                            break
-                        }
-                        else {
-                            textView.text = getString(R.string.app_name)
-                            textView.setBackgroundColor(ContextCompat
-                                    .getColor(this, R.color.colorRed))
-                        }
+                    for (label in list) {
+                        showResult(isDog(label))
                     }
                 }
-                .addOnFailureListener{
-                    textView.text = getString(R.string.app_name)
-                    textView.setBackgroundColor(ContextCompat
-                            .getColor(this, R.color.colorRed))
+                .addOnFailureListener{ _ ->
+                    showResult(isDog = false)
                 }
     }
 
-    fun hideSystemUI()
+    private fun hideSystemUI()
     {
         window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                 or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
@@ -130,7 +137,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
-        if(hasFocus)
+        if(hasFocus) {
             hideSystemUI()
+        }
     }
 }

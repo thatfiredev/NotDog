@@ -3,4 +3,4 @@
 
 [NotDog](https://not-dog-io.firebaseapp.com) is the Shazam of animals. It is based on the [Not HotDog app](https://www.seefoodtechnologies.com/nothotdog/) developed by See Food Technologies.
 
-The application uses [ML Kit for Firebase](https://firebase.google.com/products/ml-kit) to tell you if you have a dog or not.
+The application uses [ML Kit for Firebase](https://firebase.google.com/products/ml-kit) to tell if you have a dog or not.

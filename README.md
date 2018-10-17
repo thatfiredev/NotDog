@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/rosariopfernandes/NotDog.svg?branch=master)](https://travis-ci.org/rosariopfernandes/NotDog)
+
 # NotDog
 
 [NotDog](https://not-dog-io.firebaseapp.com) is the Shazam of animals. It tells you whether you have a dog or not.

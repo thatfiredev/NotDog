@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Όχι Σκύλος</string>
+    <string name="dog">Σκύλος</string>
+    <string name="action_settings">Ρυθμίσεις</string>
+    <string name="permission_explanation">Δεν μπορούμε να δούμε το σκυλί αν δεν μας επιτρέψετε να χρησιμοποιήσουμε την κάμερα</string>
+</resources>

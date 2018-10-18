@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">To nie jest pies</string>
+    <string name="dog">To jest pies</string>
+    <string name="action_settings">Ustawienia</string>
+    <string name="permission_explanation">Nie jesteśmy w stanie zobaczyć psa, dopóki nie pozwolisz nam użyć kamery</string>
+</resources>

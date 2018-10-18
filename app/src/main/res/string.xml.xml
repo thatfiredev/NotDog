@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Bukan Anjing</string>
+    <string name="dog">Anjing</string>
+    <string name="action_settings">Pengaturan</string>
+    <string name="permission_explanation">Kami tidak bisa melihat anjing jika Anda tidak mengizinkan kami menggunakan kamera.</string>
+</resources>

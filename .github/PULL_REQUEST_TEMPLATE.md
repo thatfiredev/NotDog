@@ -4,7 +4,7 @@
 - [ ] I have made a material change to the repo (functionality, testing, spelling, grammar).
 - [ ] I have read the [Contribution Guide](CONTRIBUTING.md) and my PR follows them.
 - [ ] I have discussed these changes via issue.
-- [ ] I have made my changes on a new branch
+- [ ] I have made my changes on a new branch.
 - [ ] My code follows the code style of this project.
 - [ ] I have updated the documentation accordingly.
 - [ ] I have added tests to cover my changes.

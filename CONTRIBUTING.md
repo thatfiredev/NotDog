@@ -31,7 +31,7 @@ Before making any changes, consider following these steps:
 
 2. Search the issue tracker for issues related to your changes.
 
-3. Open a [new issue](github.com/rosariopfernandes/firextensions/issues/new) to discuss your changes
+3. Open a [new issue](https://github.com/rosariopfernandes/NotDog/issues/new) to discuss your changes
  with the project owners. If they approve it, send the Pull Request.
 
 ### Sending Pull Requests
@@ -46,7 +46,7 @@ git clone https://github.com/<your-username>/<repo-name>
 # Navigate to the newly cloned directory
 cd <repo-name>
 # Assign the original repo to a remote called "upstream"
-git remote add upstream https://github.com/rosariopfernandes/firextensions
+git remote add upstream https://github.com/rosariopfernandes/NotDog
 ```
 
 2. Make your changes in a new branch:

@@ -40,5 +40,4 @@ android:
     - 'android-sdk-preview-license.+'
     - 'mips-android-sysimage-license.+'
 script:
-  - 'if [ "$TRAVIS_PULL_REQUEST" = false ]; then base64 --decode > app/google-services.json; else cp mock-google-services.json app/google-services.json; fi'
-  - ./gradlew clean build
+  - ./build.sh

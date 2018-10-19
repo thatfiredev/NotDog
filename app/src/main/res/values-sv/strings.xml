@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Inte hund</string>
+    <string name="dog">Hund</string>
+    <string name="action_settings">Inställningar</string>
+    <string name="permission_explanation">Vi kan inte se hunden om du inte tillåter oss att använda kameran</string>
+</resources>

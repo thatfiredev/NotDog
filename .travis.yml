@@ -40,5 +40,4 @@ android:
     - 'android-sdk-preview-license.+'
     - 'mips-android-sysimage-license.+'
 script:
-  - echo "${GOOGLE_SERVICES}" | base64 --decode > app/google-services.json
-  - ./gradlew clean build
+  - ./build.sh

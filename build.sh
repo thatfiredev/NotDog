@@ -16,7 +16,7 @@ fi
 if [ $TRAVIS_PULL_REQUEST = false ] ; then
   echo "Building full project"
   # For a merged commit, build all configurations.
-  base64 --decode > app/google-services.json
+  echo "${GOOGLE_SERVICES}" | base64 --decode > app/google-services.json
   ./gradlew clean build
 else
   # On a pull request, just build debug which is much faster and catches

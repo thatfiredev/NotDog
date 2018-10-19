@@ -5,7 +5,6 @@
 [NotDog](https://not-dog-io.firebaseapp.com) is the Shazam of animals. It tells you whether you have a dog or not.
 It is based on the [Not HotDog app](https://www.seefoodtechnologies.com/nothotdog/) developed by See Food Technologies.
 
-
 <p align="center">
   <img src="screenshots/negative_notdog.jpg" height="480" width="270" alt="Not Dog"/>
   <img src="screenshots/positive_notdog.jpg" height="480" width="270" alt="Not Dog"/>

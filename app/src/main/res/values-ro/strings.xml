@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Nu e câine</string>
+    <string name="dog">Câine</string>
+    <string name="action_settings">Setări</string>
+    <string name="permission_explanation">Nu putem vedea câinele dacă nu ne dați permisiunea de a utiliza camera.</string>
+</resources>

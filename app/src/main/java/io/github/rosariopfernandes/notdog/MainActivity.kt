@@ -25,8 +25,8 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
-import android.support.v7.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.appcompat.app.AppCompatActivity
 import android.view.View
 import com.bumptech.glide.Glide
 import com.google.firebase.ml.vision.FirebaseVision
@@ -103,7 +103,7 @@ class MainActivity : AppCompatActivity() {
         textView.setBackgroundColor(ContextCompat.getColor(this, color))
     }
 
-    private fun labelImage(bitmap:Bitmap) {
+    private fun labelImage(bitmap: Bitmap) {
         val options = FirebaseVisionLabelDetectorOptions.Builder()
                 .setConfidenceThreshold(0.7f)
                 .build()

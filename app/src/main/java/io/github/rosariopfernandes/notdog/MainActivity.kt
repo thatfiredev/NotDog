@@ -25,14 +25,14 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.os.Bundle
-import androidx.core.content.ContextCompat
-import androidx.appcompat.app.AppCompatActivity
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.google.firebase.ml.vision.FirebaseVision
 import com.google.firebase.ml.vision.common.FirebaseVisionImage
-import com.google.firebase.ml.vision.label.FirebaseVisionLabel
-import com.google.firebase.ml.vision.label.FirebaseVisionLabelDetectorOptions
+import com.google.firebase.ml.vision.label.FirebaseVisionImageLabel
+import com.google.firebase.ml.vision.label.FirebaseVisionOnDeviceImageLabelerOptions
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 
@@ -87,7 +87,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun isDog(label: FirebaseVisionLabel) = label.label.equals("Dog", true)
+    private fun isDog(label: FirebaseVisionImageLabel) = label.text.equals("Dog", true)
 
     private fun showResult(isDog: Boolean) {
         textView.text = if (isDog) {
@@ -104,15 +104,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun labelImage(bitmap: Bitmap) {
-        val options = FirebaseVisionLabelDetectorOptions.Builder()
+        val options = FirebaseVisionOnDeviceImageLabelerOptions.Builder()
                 .setConfidenceThreshold(0.7f)
                 .build()
 
         val image = FirebaseVisionImage.fromBitmap(bitmap)
 
         FirebaseVision.getInstance()
-                .getVisionLabelDetector(options)
-                .detectInImage(image)
+                .getOnDeviceImageLabeler(options)
+                .processImage(image)
                 .addOnSuccessListener { list ->
                     for (label in list) {
                         showResult(isDog(label))

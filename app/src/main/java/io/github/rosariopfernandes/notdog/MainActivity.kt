@@ -80,7 +80,7 @@ class MainActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK) {
             data?.let {
-                val photo = it.extras.get("data") as Bitmap
+                val photo = it.extras?.get("data") as Bitmap
                 Glide.with(this).load(photo).into(imageView)
                 labelImage(photo)
             }
@@ -118,7 +118,7 @@ class MainActivity : AppCompatActivity() {
                         showResult(isDog(label))
                     }
                 }
-                .addOnFailureListener { _ ->
+                .addOnFailureListener {
                     showResult(isDog = false)
                 }
     }

@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Keen Hond</string>
+    <string name="dog">Hond</string>
+    <string name="action_settings">Astellungen</string>
+    <string name="permission_explanation">Mir kennen den Hond leider net gesinn wann\'s du eis net erlaabs d\'Kamera ze benotzen.</string>
+</resources>

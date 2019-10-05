@@ -1,6 +1,6 @@
 <Resources>
      <string name = "app_name"> Geen hond </ string>
      <string name="dog">hond</string>
-     <string name = "action_settings"> Instellingen </ string>
+     <string name="action_settings">Instellingen</string>
      <string name = "permit_explanation"> We kunnen de hond niet zien als u ons niet toestaat de camera te gebruiken. </ string>
 </ Resources>

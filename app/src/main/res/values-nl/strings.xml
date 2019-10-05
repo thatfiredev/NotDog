@@ -1,4 +1,4 @@
-<Resources>
+<resources>
      <string name = "app_name"> Geen hond </ string>
      <string name="dog">hond</string>
      <string name="action_settings">Instellingen</string>

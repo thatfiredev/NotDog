@@ -25,14 +25,14 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
-import android.support.v7.app.AppCompatActivity
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.google.firebase.ml.vision.FirebaseVision
 import com.google.firebase.ml.vision.common.FirebaseVisionImage
-import com.google.firebase.ml.vision.label.FirebaseVisionLabel
-import com.google.firebase.ml.vision.label.FirebaseVisionLabelDetectorOptions
+import com.google.firebase.ml.vision.label.FirebaseVisionImageLabel
+import com.google.firebase.ml.vision.label.FirebaseVisionOnDeviceImageLabelerOptions
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 
@@ -80,14 +80,14 @@ class MainActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK) {
             data?.let {
-                val photo = it.extras.get("data") as Bitmap
+                val photo = it.extras?.get("data") as Bitmap
                 Glide.with(this).load(photo).into(imageView)
                 labelImage(photo)
             }
         }
     }
 
-    private fun isDog(label: FirebaseVisionLabel) = label.label.equals("Dog", true)
+    private fun isDog(label: FirebaseVisionImageLabel) = label.text.equals("Dog", true)
 
     private fun showResult(isDog: Boolean) {
         textView.text = if (isDog) {
@@ -103,16 +103,16 @@ class MainActivity : AppCompatActivity() {
         textView.setBackgroundColor(ContextCompat.getColor(this, color))
     }
 
-    private fun labelImage(bitmap:Bitmap) {
-        val options = FirebaseVisionLabelDetectorOptions.Builder()
+    private fun labelImage(bitmap: Bitmap) {
+        val options = FirebaseVisionOnDeviceImageLabelerOptions.Builder()
                 .setConfidenceThreshold(0.7f)
                 .build()
 
         val image = FirebaseVisionImage.fromBitmap(bitmap)
 
         FirebaseVision.getInstance()
-                .getVisionLabelDetector(options)
-                .detectInImage(image)
+                .getOnDeviceImageLabeler(options)
+                .processImage(image)
                 .addOnSuccessListener { list ->
                     for (label in list) {
                         showResult(isDog(label))

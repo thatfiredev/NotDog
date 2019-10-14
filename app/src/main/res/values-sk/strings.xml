@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Nie je to pes</string>
+    <string name="action_settings">Nastavenia</string>
+    <string name="dog">Je to pes</string>
+    <string name="permission_explanation">Neuvidíme psa, ak nám nedáte prístup ku kamere</string>
+</resources>

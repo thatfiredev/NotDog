@@ -118,7 +118,7 @@ class MainActivity : AppCompatActivity() {
                         showResult(isDog(label))
                     }
                 }
-                .addOnFailureListener { _ ->
+                .addOnFailureListener {
                     showResult(isDog = false)
                 }
     }

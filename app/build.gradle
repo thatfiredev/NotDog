@@ -45,8 +45,8 @@ dependencies {
 
     implementation 'com.github.PauloEnoque:Nahu:beta'
     
-    implementation 'com.github.bumptech.glide:glide:4.9.0'
-    kapt 'com.github.bumptech.glide:compiler:4.9.0'
+    implementation 'com.github.bumptech.glide:glide:4.10.0'
+    kapt 'com.github.bumptech.glide:compiler:4.10.0'
 }
 
 apply plugin: 'com.google.gms.google-services'

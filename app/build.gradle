@@ -40,8 +40,8 @@ dependencies {
 
     implementation 'com.google.firebase:firebase-analytics:17.2.0'
 
-    implementation 'com.google.firebase:firebase-ml-vision:23.0.0'
-    implementation 'com.google.firebase:firebase-ml-vision-image-label-model:18.0.0'
+    implementation 'com.google.firebase:firebase-ml-vision:24.0.0'
+    implementation 'com.google.firebase:firebase-ml-vision-image-label-model:19.0.0'
 
     implementation 'com.github.PauloEnoque:Nahu:beta'
     

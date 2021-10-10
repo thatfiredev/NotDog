@@ -2,5 +2,5 @@
     <string name="app_name">Pas un chien</string>
     <string name="dog">Chien</string>
     <string name="action_settings">Paramètres</string>
-    <string name="permission_explanation">Nous ne pouvons pas voir le chien si vous ne nous le permettez pas utiliser le caméra.</string>
+    <string name="permission_explanation">Nous ne pouvons pas voir le chien si vous ne nous permettez pas d\'utiliser la caméra.</string>
 </resources>

@@ -8,13 +8,24 @@
 
     <include layout="@layout/content_main" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center"
+    <ImageButton
+        android:id="@+id/ibCamera"
+        android:layout_width="@dimen/img_action_btn"
+        android:layout_height="@dimen/img_action_btn"
+        android:layout_gravity="bottom|start"
         android:layout_margin="@dimen/fab_margin"
+        android:background="@drawable/rounded_corner"
         app:fabSize="normal"
         app:srcCompat="@drawable/ic_camera_alt_white_24dp" />
+
+    <ImageButton
+        android:id="@+id/ibGallery"
+        android:layout_width="@dimen/img_action_btn"
+        android:layout_height="@dimen/img_action_btn"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        android:background="@drawable/rounded_corner"
+        android:contentDescription="Camera Icon"
+        app:srcCompat="@drawable/ic_gallery" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

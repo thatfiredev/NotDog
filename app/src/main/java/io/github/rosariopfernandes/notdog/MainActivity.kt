@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setCameraOnClickListener() {
-        fabCamera.setOnClickListener {
+        ibCamera.setOnClickListener {
             permissinaManager {
                 activity = this@MainActivity
                 permission = Manifest.permission.CAMERA
@@ -76,7 +76,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setGalleryOnClickListener() {
-        fabGallery.setOnClickListener {
+        ibGallery.setOnClickListener {
             permissinaManager {
                 activity = this@MainActivity
                 permission = Manifest.permission.READ_EXTERNAL_STORAGE
